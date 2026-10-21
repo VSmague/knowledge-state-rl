@@ -1,0 +1,30 @@
+# Core training stack
+torch
+numpy
+
+# minigrid_game/
+gymnasium
+minigrid
+
+# crafter_game/
+crafter
+
+# fetch_game/ — gymnasium-robotics pulls in mujoco itself, but pin mujoco
+# explicitly: mujoco>=3.2 crashes gymnasium-robotics==1.4.2's Fetch model
+# loading (AssertionError in mujoco_utils.set_joint_qpos), verified
+# locally — mujoco==3.1.6 works.
+gymnasium-robotics
+mujoco==3.1.6
+
+# core/plots.py
+matplotlib
+pillow
+
+# core/plots.py's smooth_curve (median/mean filtering for loss curves) only
+scipy
+
+# crafter_game/goal_llm_embed.py only — NOT needed for training itself,
+# only to precompute Qwen embeddings ONCE on a machine with internet
+# (see that script's docstring). Comment out if you never run it on a
+# compute-node-only setup like Jean Zay, to keep the install lighter.
+# sentence-transformers
